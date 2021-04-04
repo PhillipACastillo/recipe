@@ -31,6 +31,12 @@ public class Recipe {
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
 
+    // We specify the EnumType here to override the default (ORDINAL)
+    // When modified, the enumerated entity will not encounter any conflicts in the
+      // original database
+    @Enumerated(value = EnumType.STRING)
+    private Difficulty difficulty;
+
     public Long getId() {
         return id;
     }
