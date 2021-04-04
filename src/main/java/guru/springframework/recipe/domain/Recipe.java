@@ -1,6 +1,7 @@
 package guru.springframework.recipe.domain;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Recipe {
@@ -16,7 +17,13 @@ public class Recipe {
     private String source;
     private String url;
     private String directions;
-    
+
+    // A recipe foreign key will be stored on the set of ingredients
+      // Or, put another way, only the ingredients will have a direct tie
+      // to each recipe, but each recipe will not have a tie to each ingredient
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    private Set<Ingredient> ingredients;
+
     @Lob
     private Byte[] image;
 
