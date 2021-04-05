@@ -125,8 +125,17 @@ public class  Recipe {
         return notes;
     }
 
+    // Simplify bidirectional relationships by setting both entities
+      // to each other within the same method
     public void setNotes(Notes notes) {
         this.notes = notes;
+        notes.setRecipe(this);
+    }
+
+    public Recipe addIngredient(Ingredient ingredient) {
+        ingredient.setRecipe(this);
+        this.ingredients.add(ingredient);
+        return this;
     }
 
     public Set<Ingredient> getIngredients() {
