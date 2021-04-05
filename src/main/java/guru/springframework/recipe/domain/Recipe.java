@@ -1,10 +1,11 @@
 package guru.springframework.recipe.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Recipe {
+public class  Recipe {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,13 +17,15 @@ public class Recipe {
     private Integer servings;
     private String source;
     private String url;
+
+    @Lob
     private String directions;
 
     // A recipe foreign key will be stored on the set of ingredients
       // Or, put another way, only the ingredients will have a direct tie
       // to each recipe, but each recipe will not have a tie to each ingredient
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private Set<Ingredient> ingredients;
+    private Set<Ingredient> ingredients = new HashSet<>();
 
     @Lob
     private Byte[] image;
@@ -38,7 +41,7 @@ public class Recipe {
     @JoinTable(name = "recipe_category",
     joinColumns = @JoinColumn(name = "recipe_id"),
     inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<Category> categories;
+    private Set<Category> categories = new HashSet<>();
 
     // We specify the EnumType here to override the default (ORDINAL)
     // When modified, the enumerated entity will not encounter any
