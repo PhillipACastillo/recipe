@@ -36,7 +36,7 @@ jobs:
       - save_cache:
           paths:
             - ~/.m2
-          key: Spring-JPA-Recipe-App-{{ checksum "pom.xml" }}
+          key: recipe-{{ checksum "pom.xml" }}
 
       # run tests!
       - run: mvn integration-test
